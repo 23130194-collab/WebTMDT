@@ -131,7 +131,7 @@
         </c:when>
         <c:otherwise>
           <c:forEach var="p" items="${products}">
-            <div class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp?id=${p.id}'">
+            <div class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='product-detail?id=${p.id}'">
               <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
                 <c:choose>
                   <c:when test="${not empty p.primaryImage}">

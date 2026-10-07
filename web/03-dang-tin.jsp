@@ -54,20 +54,16 @@
         </div>
       </div>
 
-      <!-- BƯỚC 2: HÌNH ẢNH THỰC TẾ -->
+                  <!-- BƯỚC 2: HÌNH ẢNH THỰC TẾ -->
       <div class="space-y-3">
         <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
           Bước 2: Hình ảnh thực tế (Tối đa 6 ảnh chụp rõ nét) <span class="text-red-500">*</span>
         </label>
         <label class="block border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-500 transition cursor-pointer bg-slate-50 relative">
-          <input type="file" name="images" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewImages(this)">
+          <input type="file" name="images" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0" onchange="previewImages(this)">
           <div class="text-xs font-semibold text-blue-600">Bấm để tải ảnh chụp món đồ lên hoặc kéo thả tệp vào đây</div>
           <p class="text-[11px] text-slate-500 mt-1">Chụp đủ các góc cạnh, tem thông số, các vết trầy xước (nếu có) để người mua yên tâm</p>
-          <div class="mt-4 flex flex-wrap justify-center gap-2.5">
-            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium">Ảnh chính</div>
-            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium">Góc nghiêng</div>
-            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium">Lốc máy / Tem</div>
-            <div class="w-16 h-16 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center text-[10px] text-slate-400 font-medium">+ Thêm ảnh</div>
+          <div id="previewContainer" class="mt-4 flex flex-wrap justify-center gap-2.5 relative z-10">
           </div>
         </label>
       </div>
@@ -114,8 +110,7 @@
 
         <div>
           <label class="block text-xs font-medium text-slate-700 mb-1">Mô tả tình trạng chi tiết</label>
-          <textarea 
-            rows="4" 
+          <textarea name="description" rows="4" 
             class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 leading-relaxed"
           >Cần pass lại iPhone 18 Pro Max 256GB màu Đỏ Burgundy cực đẹp keng 99.9% không một vết xước. Máy mua chính hãng mã VN/A, pin chuẩn 100%, bảo hành Apple Care dài hạn, fullbox trùng IMEI.</textarea>
         </div>
@@ -129,18 +124,18 @@
         
         <div class="space-y-2.5">
           <label class="flex items-start gap-3 p-3.5 border-2 border-blue-600 bg-blue-50/50 rounded-xl cursor-pointer">
-            <input type="checkbox" checked class="mt-0.5 w-4 h-4 text-blue-600 rounded">
+            <input type="radio" name="delivery_method" value="1" checked class="mt-0.5 w-4 h-4 text-blue-600 rounded">
             <div>
               <span class="text-xs font-bold text-slate-900 block">1. Hẹn gặp trực tiếp (Người mua cọc giữ chỗ 10%)</span>
               <p class="text-[11px] text-slate-600 mt-0.5">Phù hợp với mặt hàng Xe cộ, Đồ cồng kềnh. Người mua đặt cọc trước qua VietQR để hẹn giờ xem đồ, chống bỏ hẹn.</p>
             </div>
           </label>
 
-          <label class="flex items-start gap-3 p-3.5 border border-slate-200 rounded-xl opacity-60">
-            <input type="checkbox" disabled class="mt-0.5 w-4 h-4 text-slate-400 rounded">
+          <label class="flex items-start gap-3 p-3.5 border border-slate-200 rounded-xl cursor-pointer">
+            <input type="radio" name="delivery_method" value="2" class="mt-0.5 w-4 h-4 text-slate-600 rounded">
             <div>
-              <span class="text-xs font-bold text-slate-500 block">2. Giao hàng qua bưu điện / shipper (Khách được dùng thử 48h)</span>
-              <p class="text-[11px] text-slate-400 mt-0.5">Mặt hàng Xe cộ yêu cầu thử xe trực tiếp nên phương thức này được tạm tắt.</p>
+              <span class="text-xs font-bold text-slate-900 block">2. Giao hàng qua bưu điện / shipper (Khách được dùng thử 48h)</span>
+              <p class="text-[11px] text-slate-600 mt-0.5">Mặt hàng Xe cộ yêu cầu thử xe trực tiếp nên phương thức này được tạm tắt.</p>
             </div>
           </label>
         </div>
@@ -198,19 +193,19 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-          <label class="p-3 bg-white border border-slate-200 rounded-lg cursor-pointer flex flex-col justify-between">
+          <label class="p-3 bg-white border-2 border-blue-500 rounded-lg cursor-pointer flex flex-col justify-between shadow-sm">
             <div>
-              <input type="radio" name="vip_boost" checked class="text-blue-600">
+              <input type="radio" name="vip_boost" value="normal" checked class="text-blue-600">
               <span class="font-bold text-xs text-slate-800 block mt-1">Tin Thường</span>
               <p class="text-[10px] text-slate-500 mt-1">Hiển thị theo luồng thời gian tự nhiên.</p>
             </div>
             <div class="font-bold text-xs text-slate-700 mt-2">0 đ (Miễn phí)</div>
           </label>
 
-          <label class="p-3 bg-white border-2 border-amber-500 rounded-lg cursor-pointer flex flex-col justify-between shadow-sm">
+          <label class="p-3 bg-white border border-slate-200 rounded-lg cursor-pointer flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <input type="radio" name="vip_boost" class="text-amber-600">
+                <input type="radio" name="vip_boost" value="hot" class="text-amber-600">
                 <span class="text-[9px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">HOT</span>
               </div>
               <span class="font-bold text-xs text-amber-900 block mt-1">Gói Nổi Bật Danh Mục</span>
@@ -219,10 +214,10 @@
             <div class="font-bold text-xs text-amber-700 mt-2">15.000 đ / ngày</div>
           </label>
 
-          <label class="p-3 bg-white border border-purple-300 rounded-lg cursor-pointer flex flex-col justify-between">
+          <label class="p-3 bg-white border border-slate-200 rounded-lg cursor-pointer flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <input type="radio" name="vip_boost" class="text-purple-600">
+                <input type="radio" name="vip_boost" value="vip" class="text-purple-600">
                 <span class="text-[9px] font-bold text-purple-700 bg-purple-100 px-1.5 py-0.5 rounded">VIP</span>
               </div>
               <span class="font-bold text-xs text-purple-900 block mt-1">Gói VIP Toàn Sàn</span>
@@ -235,7 +230,7 @@
 
       <!-- NÚT XUẤT BẢN BÀI ĐĂNG -->
       <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-        <a href="01-trang-chu.jsp" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition">
+        <a href="home" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition">
           Hủy bỏ
         </a>
         <button type="submit" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold rounded-lg shadow-sm transition">
@@ -256,7 +251,7 @@
           <p class="text-xs text-slate-500 mt-1">Tin đăng của bạn đã được kiểm duyệt tự động bằng AI và xuất bản lên sàn MuaNgay.</p>
         </div>
         <div class="pt-2">
-          <a href="01-trang-chu.jsp" class="block w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition">
+          <a href="home" class="block w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition">
             Về Trang Chủ Xem Tin Đăng
           </a>
         </div>
@@ -278,27 +273,185 @@
     }
   </script>
 
-  <script>
+      <script>
+    let selectedFiles = [];
+    let dragStartIndex = null;
+
     function previewImages(input) {
-      const container = document.getElementById('previewContainer');
-      container.innerHTML = ''; 
-      
       if (input.files && input.files.length > 0) {
         for (let i = 0; i < input.files.length; i++) {
-          const file = input.files[i];
-          const reader = new FileReader();
-          
-          reader.onload = function(e) {
-            const imgHtml = '<img src="' + e.target.result + '" class="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-sm" />';
-            container.innerHTML += imgHtml;
+          if (selectedFiles.length < 6) { 
+            selectedFiles.push(input.files[i]);
           }
-          
-          reader.readAsDataURL(file);
         }
-      } else {
-        container.innerHTML = '<div class="text-xs text-slate-400">Chưa chọn ảnh nào</div>';
       }
+      input.value = ''; 
+      renderPreview();
     }
+
+    function updateFileInput() {
+      const dt = new DataTransfer();
+      selectedFiles.forEach(file => dt.items.add(file));
+      document.querySelector('input[type="file"][name="images"]').files = dt.files;
+    }
+
+    function renderPreview() {
+      const container = document.getElementById('previewContainer');
+      container.innerHTML = '';
+      
+      if (selectedFiles.length === 0) {
+        // Giao diện gốc ban đầu khi chưa có ảnh
+        container.innerHTML = `
+            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium pointer-events-none">Ảnh chính</div>
+            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium pointer-events-none">Góc nghiêng</div>
+            <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium pointer-events-none">Lốc máy / Tem</div>
+            <div class="w-16 h-16 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center text-[10px] text-slate-400 font-medium pointer-events-none">+ Thêm ảnh</div>
+        `;
+        updateFileInput();
+        return;
+      }
+      
+      selectedFiles.forEach((file, index) => {
+        const url = URL.createObjectURL(file);
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'relative group w-16 h-16 flex-shrink-0 cursor-grab active:cursor-grabbing transition-transform duration-200 bg-white rounded-lg hover:-translate-y-1';
+        wrapper.draggable = true;
+        
+        wrapper.addEventListener('dragstart', function(e) {
+          dragStartIndex = index;
+          e.dataTransfer.effectAllowed = 'move';
+          // Fix issue HTML5 drag drop on same element
+          setTimeout(() => this.classList.add('opacity-40'), 0);
+        });
+        
+        wrapper.addEventListener('dragover', function(e) {
+          e.preventDefault(); 
+          e.dataTransfer.dropEffect = 'move';
+        });
+        
+        wrapper.addEventListener('drop', function(e) {
+          e.preventDefault();
+          e.stopPropagation(); // Ngăn chặn trigger chọn file của label cha
+          const dragEndIndex = index;
+          if (dragStartIndex !== null && dragStartIndex !== dragEndIndex) {
+            const draggedItem = selectedFiles.splice(dragStartIndex, 1)[0];
+            selectedFiles.splice(dragEndIndex, 0, draggedItem);
+            renderPreview();
+          }
+        });
+        
+        wrapper.addEventListener('dragend', function(e) {
+          this.classList.remove('opacity-40');
+        });
+
+        const img = document.createElement('img');
+        img.src = url;
+        img.className = 'w-full h-full object-cover rounded-lg border-2 ' + (index === 0 ? 'border-amber-500 shadow-sm' : 'border-slate-200');
+        
+        const label = document.createElement('div');
+        if (index === 0) {
+          label.className = 'absolute bottom-0 left-0 right-0 bg-amber-500 text-white text-[9px] text-center font-bold py-0.5 rounded-b-md shadow-sm truncate px-1';
+          label.innerText = 'Ảnh đại diện';
+        } else {
+          label.className = 'absolute bottom-0 left-0 right-0 bg-slate-800/70 backdrop-blur-sm text-white text-[9px] text-center font-medium py-0.5 rounded-b-md truncate px-1';
+          label.innerText = 'Chi tiết ' + index;
+        }
+        
+        const removeBtn = document.createElement('div');
+        removeBtn.innerHTML = '✕';
+        removeBtn.className = 'absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:scale-110 shadow-md transition-all z-20 cursor-pointer';
+        
+        // Ngăn chặn nổi bọt event lên label cha khi click nút xóa (ngăn mở file dialog)
+        removeBtn.onclick = function(e) {
+          e.preventDefault(); 
+          e.stopPropagation();
+          selectedFiles.splice(index, 1);
+          renderPreview();
+        };
+        
+        wrapper.appendChild(img);
+        wrapper.appendChild(label);
+        wrapper.appendChild(removeBtn);
+        container.appendChild(wrapper);
+      });
+      
+      updateFileInput();
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // BƯỚC 1: HÌNH THỨC ĐĂNG TIN
+      const dealRadios = document.querySelectorAll('input[name="deal_type"]');
+      const priceInput = document.querySelector('input[name="price"]');
+      dealRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          // Reset style
+          dealRadios.forEach(r => {
+            const label = r.closest('label');
+            label.className = 'flex flex-col p-3.5 border-2 border-slate-200 hover:border-slate-300 rounded-xl cursor-pointer';
+            label.querySelector('span:first-child').className = 'text-xs font-bold text-slate-800';
+          });
+          // Set active style
+          const activeLabel = this.closest('label');
+          activeLabel.className = 'flex flex-col p-3.5 border-2 border-blue-600 bg-blue-50/50 rounded-xl cursor-pointer';
+          activeLabel.querySelector('span:first-child').className = 'text-xs font-bold text-blue-900';
+
+          // BƯỚC 3: Giá bán mong muốn
+          if (this.value === 'give') {
+            priceInput.value = '0';
+            priceInput.readOnly = true;
+            priceInput.className = 'w-full px-3.5 py-2 bg-slate-100 border border-slate-300 rounded-lg text-xs font-bold text-slate-400 cursor-not-allowed';
+          } else {
+            priceInput.value = '';
+            priceInput.readOnly = false;
+            priceInput.className = 'w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs font-bold text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500';
+          }
+        });
+      });
+
+      // BƯỚC 4: PHƯƠNG THỨC GIAO NHẬN
+      const deliveryChecks = document.querySelectorAll('input[name="delivery_method"]');
+      deliveryChecks.forEach(check => {
+        check.addEventListener('change', function() {
+          // Reset all
+          deliveryChecks.forEach(c => {
+             const lbl = c.closest('label');
+             lbl.className = 'flex items-start gap-3 p-3.5 border border-slate-200 rounded-xl cursor-pointer';
+          });
+          // Highlight active
+          if (this.checked) {
+            const label = this.closest('label');
+            label.className = 'flex items-start gap-3 p-3.5 border-2 border-blue-600 bg-blue-50/50 rounded-xl cursor-pointer';
+          }
+        });
+      });
+
+      // BƯỚC 6: GÓI ĐẨY TIN VIP
+      const vipRadios = document.querySelectorAll('input[name="vip_boost"]');
+      vipRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          // Tắt hết
+          vipRadios.forEach(r => {
+            const label = r.closest('label');
+            label.className = 'p-3 bg-white border border-slate-200 rounded-lg cursor-pointer flex flex-col justify-between';
+          });
+          
+          // Bật cái được chọn
+          const activeLabel = this.closest('label');
+          const isHot = activeLabel.querySelector('span.text-amber-700');
+          const isVip = activeLabel.querySelector('span.text-purple-700');
+          
+          if (isVip) {
+            activeLabel.className = 'p-3 bg-white border-2 border-purple-500 rounded-lg cursor-pointer flex flex-col justify-between shadow-sm';
+          } else if (isHot) {
+            activeLabel.className = 'p-3 bg-white border-2 border-amber-500 rounded-lg cursor-pointer flex flex-col justify-between shadow-sm';
+          } else {
+            activeLabel.className = 'p-3 bg-white border-2 border-blue-500 rounded-lg cursor-pointer flex flex-col justify-between shadow-sm';
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

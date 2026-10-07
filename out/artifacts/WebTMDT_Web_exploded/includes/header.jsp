@@ -4,7 +4,7 @@
       
       <!-- LOGO SÀN GIAO DỊCH B2C MARKET CREATOR -->
       <div class="flex items-center gap-3 shrink-0">
-        <a href="01-trang-chu.jsp" class="flex items-center gap-2.5">
+        <a href="home" class="flex items-center gap-2.5">
           <img src="assets/logos/muangay-logo-icon.svg" alt="MuaNgay Logo" class="w-10 h-10 rounded-xl shadow-xs">
           <div>
             <span class="text-xl font-extrabold text-slate-900 tracking-tight block">Mua<span class="text-blue-600">Ngay</span></span>

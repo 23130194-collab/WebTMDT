@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Tiết Tin Đăng - iPhone 18 Pro Max Đỏ Burgundy 256GB | MuaNgay</title>
+  <title>${product.title} | MuaNgay</title>
   <link rel="icon" type="image/svg+xml" href="assets/logos/muangay-logo-icon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,13 +49,13 @@
   <!-- ĐƯỜNG DẪN BREADCRUMB PHÂN CẤP -->
   <div class="bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 text-xs text-slate-500 flex items-center gap-2">
-      <a href="01-trang-chu.jsp" class="hover:text-blue-600">Trang chủ</a>
+      <a href="home" class="hover:text-blue-600">Trang chủ</a>
       <span>/</span>
-      <a href="01-trang-chu.jsp" class="hover:text-blue-600">Điện Thoại & Thiết Bị Số</a>
+      <a href="home" class="hover:text-blue-600">Điện Thoại & Thiết Bị Số</a>
       <span>/</span>
-      <a href="01-trang-chu.jsp" class="hover:text-blue-600">TP. Hồ Chí Minh</a>
+      <a href="home" class="hover:text-blue-600">TP. Hồ Chí Minh</a>
       <span>/</span>
-      <span class="text-slate-900 font-medium truncate">iPhone 18 Pro Max Đỏ Burgundy 256GB</span>
+      <span class="text-slate-900 font-medium truncate">${product.title}</span>
     </div>
   </div>
 
@@ -80,11 +82,12 @@
             </p>
           </div>
 
-          <div
+                    <div
             class="w-full h-80 sm:h-96 rounded-lg overflow-hidden relative group bg-slate-950 flex items-center justify-center">
+            <c:set var="mainImage" value="${not empty images ? images[0].imageUrl : 'assets/images/no-image.jpg'}" />
             <img id="mainDetailImage"
-              src="assets/images/iphone-18-pro-mau-do-anh-dao-dam-1-iphone-18-pro-mau-do-burgundy-co-gi-dac-biet-1.jpg"
-              alt="iPhone 18 Pro Max Đỏ Burgundy 256GB chính hãng"
+              src="${mainImage}"
+              alt="${product.title}"
               class="w-full h-full object-cover transition duration-300">
             <span id="productTopBadge"
               class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded shadow-sm">
@@ -92,31 +95,16 @@
             </span>
             <span id="activeImageIndex"
               class="absolute bottom-3 right-3 bg-slate-900/80 text-white text-xs px-2.5 py-1 rounded backdrop-blur">
-              1 / 4 Góc chụp
+              1 / ${images.size()} Góc chụp
             </span>
           </div>
           <div class="grid grid-cols-4 gap-2.5 mt-3">
-            <div onclick="changeImage('assets/images/iphone-18-pro-mau-do-anh-dao-dam-1-iphone-18-pro-mau-do-burgundy-co-gi-dac-biet-1.jpg', 1, this)"
-              class="thumb-btn h-20 rounded-lg overflow-hidden border-2 border-blue-600 cursor-pointer shadow-xs transition">
-              <img
-                src="assets/images/iphone-18-pro-mau-do-anh-dao-dam-1-iphone-18-pro-mau-do-burgundy-co-gi-dac-biet-1.jpg"
-                alt="Mặt lưng titan Đỏ Burgundy" class="w-full h-full object-cover">
-            </div>
-            <div onclick="changeImage('assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy_AV2.webp', 2, this)"
-              class="thumb-btn h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-400 cursor-pointer opacity-70 hover:opacity-100 transition">
-              <img src="assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy_AV2.webp"
-                alt="Màn hình Dynamic Island sáng đẹp" class="w-full h-full object-cover">
-            </div>
-            <div onclick="changeImage('assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy.webp', 3, this)"
-              class="thumb-btn h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-400 cursor-pointer opacity-70 hover:opacity-100 transition">
-              <img src="assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy.webp"
-                alt="Cụm 3 camera siêu nét" class="w-full h-full object-cover">
-            </div>
-            <div onclick="changeImage('assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy_AV1.webp', 4, this)"
-              class="thumb-btn h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-400 cursor-pointer opacity-70 hover:opacity-100 transition">
-              <img src="assets/images/iphone-18-pro-finish-select-202609-6-9inch-burgundy_AV1.webp"
-                alt="Hộp phụ kiện fullbox trùng IMEI" class="w-full h-full object-cover">
-            </div>
+            <c:forEach var="img" items="${images}" varStatus="loop">
+                <div onclick="changeImage('${img.imageUrl}', ${loop.index + 1}, this)"
+                  class="thumb-btn h-20 rounded-lg overflow-hidden border ${loop.index == 0 ? 'border-2 border-blue-600' : 'border-slate-200'} cursor-pointer hover:border-slate-400 opacity-70 hover:opacity-100 transition shadow-xs">
+                  <img src="${img.imageUrl}" alt="Ảnh ${loop.index + 1}" class="w-full h-full object-cover">
+                </div>
+            </c:forEach>
           </div>
         </div>
 
@@ -141,28 +129,11 @@
             </div>
             <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
               <span class="text-slate-400 block text-[10px]">Tình trạng máy</span>
-              <span class="font-bold text-green-700 text-xs">Keng 99.9%, Pin 100%</span>
+              <span class="font-bold text-green-700 text-xs">${product.conditionStatus}</span>
             </div>
           </div>
 
-          <div class="text-xs text-slate-700 leading-relaxed space-y-2 pt-2">
-            <p>
-              Cần pass lại siêu phẩm iPhone 18 Pro Max bản 256GB màu Đỏ Burgundy (Burgundy Red) cực kỳ thời thượng và
-              bắt trend giới trẻ hiện nay. Máy mua đập hộp chính hãng mã VN/A tại đại lý ủy quyền Apple, mới kích hoạt
-              lướt 2 tuần để trải nghiệm.
-            </p>
-            <p>
-              Ngoại hình đẹp xuất sắc 99.9% không một vết xước lông mèo, đã dán kính cường lực cao cấp Kingkong và ốp
-              lưng chống sốc xịn từ lúc bóc seal. Pin chuẩn 100%, số lần sạc dưới 15 lần, mọi tính năng Face ID, màn
-              hình ProMotion 120Hz mượt mà, camera tele tiềm vọng siêu nét, máy nguyên bản nguyên áp suất 100% chưa qua
-              bảo hành sửa chữa.
-            </p>
-            <p>
-              Phụ kiện đầy đủ fullbox hộp trùng IMEI, cáp bện Type-C zin chưa sử dụng và hóa đơn bảo hành điện tử chính
-              hãng Apple Care dài hạn. Khuyến khích qua xem máy trực tiếp tại nhà để cắm máy tính kiểm tra 3uTools thoải
-              mái hoặc ship bảo đảm dùng thử 48 giờ qua sàn MuaNgay.
-            </p>
-          </div>
+          <div class="text-xs text-slate-700 leading-relaxed space-y-2 pt-2"><p>${product.description}</p></div>
 
           <!-- ĐỊA CHỈ XEM HÀNG TRỰC TIẾP -->
           <div class="mt-3 p-3.5 rounded-lg bg-blue-50 border border-blue-200 text-xs">
@@ -227,22 +198,20 @@
         <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <span id="dealTypeBadge"
-                class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800 uppercase">
-                Tin Bán Thanh Lý
-              </span>
-              <span id="dealMethodBadge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
-                Hẹn Gặp Trực Tiếp
-              </span>
+                              <span id="dealTypeBadge"
+                  class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800 uppercase">
+                  <c:choose><c:when test="${product.price == 0}">TIN TẶNG MIỄN PHÍ</c:when><c:otherwise>TIN BÁN THANH LÝ</c:otherwise></c:choose>
+                </span>
+                              <span id="dealMethodBadge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
+                  <c:choose><c:when test="${product.deliveryMethod == 2}">Giao Hàng Qua Bưu Điện</c:when><c:otherwise>Hẹn Gặp Trực Tiếp</c:otherwise></c:choose>
+                </span>
             </div>
-            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
-              iPhone 18 Pro Max Đỏ Burgundy 256GB, chính hãng VN/A, Pin 100%, Fullbox bảo hành Apple
-            </h1>
+            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">${product.title}</h1>
             <div class="mt-2.5 flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-bold text-red-600">38.000.000 đ</span>
+              <span class="text-2xl sm:text-3xl font-bold text-red-600"><fmt:formatNumber value="${product.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/></span>
               <span class="text-xs text-slate-500">Giá tốt bắt trend</span>
             </div>
-            <p class="text-[11px] text-slate-500 mt-1">Đăng 15 phút trước tại Quận 10, TP. Hồ Chí Minh</p>
+            <p class="text-[11px] text-slate-500 mt-1">Đăng lúc ${product.createdAt} tại ${product.location}</p>
           </div>
 
           <!-- BANNER TRẠNG THÁI THEO KỊCH BẢN FLOW -->
@@ -344,7 +313,7 @@
   <script>
     function changeImage(src, index, btn) {
       document.getElementById('mainDetailImage').src = src;
-      document.getElementById('activeImageIndex').innerText = `\${index} / 4 Góc chụp`;
+      document.getElementById('activeImageIndex').innerText = `\${index} /  Góc chụp`;
 
       document.querySelectorAll('.thumb-btn').forEach(b => {
         b.className = 'thumb-btn h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-400 cursor-pointer opacity-70 hover:opacity-100 transition';
@@ -445,7 +414,7 @@
           <button disabled class="w-full py-3 bg-slate-200 text-slate-500 font-bold text-xs sm:text-sm rounded-lg flex items-center justify-center cursor-not-allowed">
             Món Đồ Này Đã Được Bán
           </button>
-          <a href="01-trang-chu.jsp" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg flex items-center justify-center shadow-sm transition">
+          <a href="home" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg flex items-center justify-center shadow-sm transition">
             Xem Các Tin Đăng Điện Thoại Khác Tại Trang Chủ ->
           </a>
         `;

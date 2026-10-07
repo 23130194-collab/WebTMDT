@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +30,7 @@ import java.util.UUID;
 public class PostAdController extends HttpServlet {
 
     private ProductService productService = new ProductService();
-    private static final String UPLOAD_DIR = "uploads";
+    private static final String UPLOAD_DIR = "assets/uploads";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,17 +64,27 @@ public class PostAdController extends HttpServlet {
         product.setPrice(price);
         product.setConditionStatus("GOOD");
         product.setLocation("TP. Hồ Chí Minh");
-        product.setStatus("PENDING");
+                product.setStatus("PENDING");
+
+        String deliveryMethodStr = request.getParameter("delivery_method");
+        int deliveryMethod = 1;
+        if (deliveryMethodStr != null) {
+            try { deliveryMethod = Integer.parseInt(deliveryMethodStr); } catch (Exception e) {}
+        }
+        product.setDeliveryMethod(deliveryMethod);
 
         // 3. Xử lý Upload Ảnh
         String applicationPath = request.getServletContext().getRealPath("");
         String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
 
-        // Tạo thư mục nếu chưa có
+        // Thu muc luu vao ma nguon
+        String sourceFilePath = "e:" + File.separator + "WebTMDT" + File.separator + "web" + File.separator + UPLOAD_DIR.replace("/", File.separator);
+
         File fileSaveDir = new File(uploadFilePath);
-        if (!fileSaveDir.exists()) {
-            fileSaveDir.mkdirs();
-        }
+        if (!fileSaveDir.exists()) fileSaveDir.mkdirs();
+        
+        File sourceSaveDir = new File(sourceFilePath);
+        if (!sourceSaveDir.exists()) sourceSaveDir.mkdirs();
 
         List<ProductImage> images = new ArrayList<>();
         boolean isFirst = true;
@@ -79,16 +92,23 @@ public class PostAdController extends HttpServlet {
         Collection<Part> parts = request.getParts();
         for (Part part : parts) {
             if (part.getName().equals("images") && part.getSize() > 0) {
-                // Đặt tên file ngẫu nhiên để tránh trùng lặp
                 String fileName = UUID.randomUUID().toString() + "_" + extractFileName(part);
+                
                 part.write(uploadFilePath + File.separator + fileName);
+                
+                try {
+                    Files.copy(
+                        Paths.get(uploadFilePath + File.separator + fileName),
+                        Paths.get(sourceFilePath + File.separator + fileName),
+                        StandardCopyOption.REPLACE_EXISTING
+                    );
+                } catch (Exception e) {}
 
                 ProductImage img = new ProductImage();
                 img.setImageUrl(UPLOAD_DIR + "/" + fileName);
                 img.setPrimary(isFirst);
                 images.add(img);
-                
-                isFirst = false; // Bức ảnh đầu tiên sẽ được chọn làm ảnh bìa
+                isFirst = false;
             }
         }
 

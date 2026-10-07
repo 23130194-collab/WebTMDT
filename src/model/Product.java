@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class Product {
     private int id;
+    private int deliveryMethod;
     private int userId;
     private int categoryId;
     private String title;
@@ -35,6 +36,9 @@ public class Product {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public int getDeliveryMethod() { return deliveryMethod; }
+    public void setDeliveryMethod(int deliveryMethod) { this.deliveryMethod = deliveryMethod; }
 
     public int getId() {
         return id;
