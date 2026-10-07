@@ -1,4 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.User" %>
+<%
+  User currentUser = (User) session.getAttribute("user");
+  String avatarText = "VB";
+  if (currentUser != null) {
+    String displayName = currentUser.getFullName() != null && !currentUser.getFullName().trim().isEmpty()
+            ? currentUser.getFullName().trim()
+            : currentUser.getUsername();
+    if (displayName != null && !displayName.trim().isEmpty()) {
+      String[] nameParts = displayName.trim().split("\\s+");
+      String first = nameParts[0].substring(0, 1);
+      String last = nameParts.length > 1 ? nameParts[nameParts.length - 1].substring(0, 1) : "";
+      avatarText = (first + last).toUpperCase();
+    }
+  }
+%>
 <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4 py-3">
       
@@ -42,8 +58,8 @@
 
       <!-- CỤM TÀI KHOẢN, QUẢN LÝ ĐƠN HÀNG VÀ ĐĂNG TIN -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="07-dang-nhap-xac-thuc.jsp" class="hidden sm:inline-block px-2 py-1 text-xs text-slate-600 hover:text-blue-600 font-semibold">
-          Đăng nhập
+        <a href="<%= currentUser == null ? "07-dang-nhap-xac-thuc.jsp" : "logout" %>" class="hidden sm:inline-block px-2 py-1 text-xs text-slate-600 hover:text-blue-600 font-semibold">
+          <%= currentUser == null ? "Đăng nhập" : "Đăng xuất" %>
         </a>
         <a href="05-quan-ly-don-hang.jsp" class="px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-100 rounded-lg transition border border-slate-200">
           Đơn hàng (2)
@@ -59,7 +75,7 @@
           Đăng Tin Miễn Phí
         </a>
         <a href="08-ho-so-ca-nhan.jsp" title="Hồ sơ cá nhân" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold hover:ring-2 hover:ring-blue-400 transition shrink-0">
-          VB
+          <%= avatarText %>
         </a>
       </div>
 

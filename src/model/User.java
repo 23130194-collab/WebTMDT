@@ -14,6 +14,7 @@ public class User {
     private int reputationScore;
     private String status;
     private Timestamp createdAt;
+    private String socialId;
 
     public User() {
     }
@@ -62,6 +63,14 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getName() {
+        return fullName;
+    }
+
+    public void setName(String name) {
+        this.fullName = name;
     }
 
     public String getEmail() {
@@ -118,5 +127,13 @@ public class User {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getSocialId() {
+        return socialId;
+    }
+
+    public void setSocialId(String socialId) {
+        this.socialId = socialId;
     }
 }

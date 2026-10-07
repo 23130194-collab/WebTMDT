@@ -518,5 +518,23 @@
     }
   </script>
 
+  <%
+      String msg = request.getParameter("message");
+      if ("post_success".equals(msg)) {
+  %>
+  <div id="successToast" class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 flex items-center gap-3 transition-opacity duration-500">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+      <span class="font-medium text-sm">Đăng tin thành công! Chờ admin duyệt nhé.</span>
+  </div>
+  <script>
+      setTimeout(() => {
+          const toast = document.getElementById('successToast');
+          if(toast) {
+              toast.style.opacity = '0';
+              setTimeout(() => toast.remove(), 500);
+          }
+      }, 3000);
+  </script>
+  <% } %>
 </body>
 </html>
