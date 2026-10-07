@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -120,259 +123,49 @@
 
     <!-- LƯỚI BÀI ĐĂNG SẢN PHẨM: ĐỒNG BỘ 100% CHIỀU CAO KHUNG CARD -->
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 items-stretch">
-
-      <!-- THẺ 1: IPHONE 13 PRO MAX -->
-      <div data-category="dientu" data-shipping="3pl" data-district="q10" data-price="14800000" class="product-card bg-white rounded-xl border-2 border-amber-400 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group relative h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/iphone-13-pro-max.jpg" alt="iPhone 13 Pro Max" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Tin VIP</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-green-700/90 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Giao tận nhà • Thử 48h</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">14.800.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              iPhone 13 Pro Max 128GB Xanh Sierra bản VN/A, pin 88%, máy đẹp 98% nguyên zin
-            </h3>
+      <c:choose>
+        <c:when test="${empty products}">
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <c:choose>
+              <c:when test="${not empty searchKeyword}">
+                <p>Không tìm thấy sản phẩm phù hợp với từ khóa “<c:out value="${searchKeyword}"/>”.</p>
+              </c:when>
+              <c:otherwise>
+                <p>Chưa có sản phẩm nào trên hệ thống. Hãy là người đầu tiên đăng tin!</p>
+              </c:otherwise>
+            </c:choose>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 10, TP.HCM</span>
-            <span class="text-green-600 font-semibold">Đồng kiểm khi nhận</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 2: IPHONE 18 PRO MAX ĐỎ BURGUNDY 256GB -->
-      <div data-category="dientu" data-shipping="pickup" data-district="q10" data-price="38000000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-950 overflow-hidden shrink-0">
-          <img src="assets/images/iphone-18-pro-mau-do-anh-dao-dam-1-iphone-18-pro-mau-do-burgundy-co-gi-dac-biet-1.jpg" alt="iPhone 18 Pro Max Đỏ Burgundy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-red-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Hot Trend 2026</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Hẹn gặp test máy</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-red-600">38.000.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              iPhone 18 Pro Max 256GB Đỏ Burgundy mới keng 99.9%, pin 100%, bảo hành Apple Care
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 10, TP.HCM</span>
-            <span>Cọc giữ máy 1tr</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 3: LAPTOP DELL XPS 13 -->
-      <div data-category="dientu" data-shipping="3pl" data-district="q1" data-price="13500000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/laptop-dell-xps13.jpg" alt="Laptop Dell XPS 13" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Đồ công nghệ</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-green-700/90 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Giao tận nhà • Thử 48h</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">13.500.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Dell XPS 13 9305 Core i5 Gen 11, RAM 16GB, SSD 512GB, màn FHD IPS siêu nét
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 1, TP.HCM</span>
-            <span>15 phút trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 4: TỦ LẠNH AQUA 90L -->
-      <div data-category="dienlanh" data-shipping="pickup" data-district="binhthanh" data-price="1350000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/tu-lanh-panasonic.jpg" alt="Tủ lạnh Aqua mini 90 lít" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Gia dụng</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Cồng kềnh • Tự chở</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">1.350.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Tủ lạnh Aqua 90 lít làm lạnh nhanh, còn bảo hành 6 tháng, phù hợp sinh viên
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận Bình Thạnh, TP.HCM</span>
-            <span>40 phút trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 5: CHO TẶNG BÀN LÀM VIỆC GỖ THÔNG (0 ĐỒNG) -->
-      <div data-category="chotang" data-shipping="pickup" data-district="tanbinh" data-price="0" class="product-card bg-white rounded-xl border border-amber-300 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/ban-go-thong.jpg" alt="Bàn làm việc gỗ thông" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-amber-500 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Tặng miễn phí</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Gặp mặt tự chở</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-amber-600">Miễn phí 0 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Dọn nhà tặng lại bàn làm việc gỗ tự nhiên 1m2 còn chắc chắn cho bạn nào qua chở
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận Tân Bình, TP.HCM</span>
-            <span>1 giờ trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 6: XE HONDA VISION 2021 -->
-      <div data-category="xeco" data-shipping="pickup" data-district="q10" data-price="26500000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/honda-vision-2021.jpg" alt="Xe máy Honda Vision Smartkey" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Thanh lý xe</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Chỉ gặp mặt</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">26.500.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Honda Vision bản Cá Tính 2021 màu xám xi măng, khoá Smartkey, chính chủ nữ chạy
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 10, TP.HCM</span>
-            <span>2 giờ trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 7: TAI NGHE CHỐNG ỒN SONY WH-1000XM4 -->
-      <div data-category="dientu" data-shipping="3pl" data-district="thuduc" data-price="3650000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/sony-wh1000xm4.jpg" alt="Tai nghe Sony WH-1000XM4" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Âm thanh</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-green-700/90 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Giao tận nhà • Thử 48h</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">3.650.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Sony WH-1000XM4 màu đen fullbox, chống ồn chủ động đỉnh cao, đệm tai mới tinh
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>TP. Thủ Đức, TP.HCM</span>
-            <span>3 giờ trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 8: IPAD AIR 5 M1 -->
-      <div data-category="dientu" data-shipping="3pl" data-district="q7" data-price="10900000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/ipad-air-m1.jpg" alt="iPad Air 5 M1 Wifi 64GB" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Máy tính bảng</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-green-700/90 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Giao tận nhà • Thử 48h</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">10.900.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              iPad Air 5 chip M1 64GB Wifi màu Xám Space, kèm bao da nam châm và bút cảm ứng
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 7, TP.HCM</span>
-            <span>4 giờ trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 9: MÁY GIẶT ELECTROLUX INVERTER -->
-      <div data-category="dienlanh" data-shipping="pickup" data-district="q1" data-price="3800000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/may-giat-electrolux.jpg" alt="Máy giặt Electrolux Inverter 8kg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Gia dụng lớn</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Chỉ gặp mặt</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">3.800.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Máy giặt lồng ngang Electrolux 8kg EcoInverter tiết kiệm điện nước, giặt êm
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 1, TP.HCM</span>
-            <span>Hôm nay</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 10: GHẾ CÔNG THÁI HỌC ERGONOMIC -->
-      <div data-category="noithat" data-shipping="pickup" data-district="govap" data-price="1850000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/ghe-ergonomic-luoi.jpg" alt="Ghế công thái học Ergonomic lưới" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-purple-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Nội thất</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Gặp mặt hoặc ba gác</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">1.850.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Ghế công thái học lưới full thoáng khí, đỡ thắt lưng điều chỉnh, tay 3D êm ái
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận Gò Vấp, TP.HCM</span>
-            <span>Hôm qua</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 11: SMART TIVI SONY 55 INCH 4K -->
-      <div data-category="dientu" data-shipping="pickup" data-district="binhthanh" data-price="6900000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/smart-tv-samsung.jpg" alt="Smart Tivi Sony 55 inch 4K" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Điện tử</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-slate-900/80 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Kiểm tra tại nhà</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">6.900.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Smart Tivi Sony Bravia 55 inch 4K HDR màn đẹp không sọc, kèm remote giọng nói
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận Bình Thạnh, TP.HCM</span>
-            <span>1 ngày trước</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THẺ 12: MÁY ẢNH MIRRORLESS SONY A6400 -->
-      <div data-category="dientu" data-shipping="3pl" data-district="q1" data-price="15200000" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
-        <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
-          <img src="assets/images/products/canon-eos-r.jpg" alt="Máy ảnh Sony A6400 kèm lens kit" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Nhiếp ảnh</span>
-          <span class="absolute bottom-2.5 right-2.5 bg-green-700/90 backdrop-blur text-white text-[10px] font-medium px-2 py-0.5 rounded">Giao tận nhà • Thử 48h</span>
-        </div>
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="text-base font-bold text-green-600">15.200.000 đ</div>
-            <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
-              Sony Alpha A6400 + Lens 16-50mm OSS, chụp khoảng 3k shot, sensor sạch đẹp
-            </h3>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Quận 1, TP.HCM</span>
-            <span>2 ngày trước</span>
-          </div>
-        </div>
-      </div>
-
+        </c:when>
+        <c:otherwise>
+          <c:forEach var="p" items="${products}">
+            <div class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" data-description="<c:out value='${p.description}'/>" onclick="window.location.href='02-chi-tiet-san-pham.jsp?id=${p.id}'">
+              <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
+                <c:choose>
+                  <c:when test="${not empty p.primaryImage}">
+                    <img src="${p.primaryImage}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                  </c:when>
+                  <c:otherwise>
+                    <div class="w-full h-full flex items-center justify-center text-slate-400 bg-slate-200 text-xs">Không có ảnh</div>
+                  </c:otherwise>
+                </c:choose>
+                <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Mới đăng</span>
+              </div>
+              <div class="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-base font-bold text-green-600"><fmt:formatNumber value="${p.price}" pattern="#,###"/> đ</div>
+                  <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9">
+                    ${p.title}
+                  </h3>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                  <span class="truncate pr-2">${p.location}</span>
+                  <span class="whitespace-nowrap flex-shrink-0">Vừa xong</span>
+                </div>
+              </div>
+            </div>
+          </c:forEach>
+        </c:otherwise>
+      </c:choose>
     </div>
 
     <!-- NÚT XEM THÊM (CÓ LOGIC NẠP THÊM CARD MẪU) -->
@@ -429,7 +222,8 @@
         let matchCategory = (activeCategory === 'all') || (cat === activeCategory);
         let matchShipping = (shipping === 'all') || (ship === shipping);
         let matchDistrict = (district === 'all') || (dist === district);
-        let matchSearch = !keyword || title.includes(keyword);
+        const description = (card.getAttribute('data-description') || '').toLowerCase();
+        let matchSearch = !keyword || title.includes(keyword) || description.includes(keyword);
 
         if (matchCategory && matchShipping && matchDistrict && matchSearch) {
           card.style.display = 'flex';
@@ -451,6 +245,12 @@
 
       // Update count text
       document.getElementById('resultCountText').innerText = `Đang hiển thị \${visibleCount} tin đăng phù hợp với tiêu chí lọc`;
+    }
+
+    const initialSearch = new URLSearchParams(window.location.search).get('q') || '';
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput && initialSearch) {
+      searchInput.value = initialSearch;
     }
 
     function loadMoreProducts() {
