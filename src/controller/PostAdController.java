@@ -97,7 +97,7 @@ public class PostAdController extends HttpServlet {
 
         // 5. Chuyển hướng
         if (success) {
-            response.sendRedirect("01-trang-chu.jsp?message=post_success");
+            response.sendRedirect("home?message=post_success");
         } else {
             response.sendRedirect("03-dang-tin.jsp?message=error");
         }

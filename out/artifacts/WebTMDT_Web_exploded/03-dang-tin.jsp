@@ -21,7 +21,7 @@
   <!-- BIỂU MẪU ĐĂNG TIN C2C ĐA NĂNG -->
   <main class="max-w-3xl mx-auto px-4 py-8 flex-1 w-full relative">
     
-    <form onsubmit="handlePostSubmit(event)" class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-8">
+    <form action="post-ad" method="POST" enctype="multipart/form-data" class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-8">
       
       <div>
         <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Đăng Tin Mua Bán & Thanh Lý Đồ Dùng</h1>
@@ -59,7 +59,8 @@
         <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
           Bước 2: Hình ảnh thực tế (Tối đa 6 ảnh chụp rõ nét) <span class="text-red-500">*</span>
         </label>
-        <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-500 transition cursor-pointer bg-slate-50">
+        <label class="block border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-500 transition cursor-pointer bg-slate-50 relative">
+          <input type="file" name="images" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewImages(this)">
           <div class="text-xs font-semibold text-blue-600">Bấm để tải ảnh chụp món đồ lên hoặc kéo thả tệp vào đây</div>
           <p class="text-[11px] text-slate-500 mt-1">Chụp đủ các góc cạnh, tem thông số, các vết trầy xước (nếu có) để người mua yên tâm</p>
           <div class="mt-4 flex flex-wrap justify-center gap-2.5">
@@ -68,7 +69,7 @@
             <div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-600 font-medium">Lốc máy / Tem</div>
             <div class="w-16 h-16 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center text-[10px] text-slate-400 font-medium">+ Thêm ảnh</div>
           </div>
-        </div>
+        </label>
       </div>
 
       <!-- BƯỚC 3: THÔNG TIN CHI TIẾT VÀ GIÁ BÁN -->
@@ -81,7 +82,7 @@
           <label class="block text-xs font-medium text-slate-700 mb-1">Tiêu đề bài đăng</label>
           <input 
             type="text" 
-            placeholder="Ví dụ: iPhone 18 Pro Max Đỏ Burgundy 256GB chính hãng hoặc MacBook Pro M3" 
+            name="title" placeholder="Ví dụ: iPhone 18 Pro Max Đỏ Burgundy 256GB chính hãng hoặc MacBook Pro M3" 
             required
             value="iPhone 18 Pro Max Đỏ Burgundy 256GB chính hãng VN/A, pin 100% fullbox"
             class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -91,7 +92,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-medium text-slate-700 mb-1">Danh mục hàng hóa</label>
-            <select class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select name="categoryId" class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
               <option selected>Điện Tử & Thiết Bị Số</option>
               <option>Xe Cộ & Phương Tiện</option>
               <option>Điện Lạnh & Gia Dụng</option>
@@ -104,7 +105,7 @@
             <label class="block text-xs font-medium text-slate-700 mb-1">Giá bán mong muốn (VNĐ)</label>
             <input 
               type="text" 
-              value="38.000.000"
+              name="price" value="38000000"
               required
               class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs font-bold text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
@@ -277,5 +278,27 @@
     }
   </script>
 
+  <script>
+    function previewImages(input) {
+      const container = document.getElementById('previewContainer');
+      container.innerHTML = ''; 
+      
+      if (input.files && input.files.length > 0) {
+        for (let i = 0; i < input.files.length; i++) {
+          const file = input.files[i];
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+            const imgHtml = '<img src="' + e.target.result + '" class="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-sm" />';
+            container.innerHTML += imgHtml;
+          }
+          
+          reader.readAsDataURL(file);
+        }
+      } else {
+        container.innerHTML = '<div class="text-xs text-slate-400">Chưa chọn ảnh nào</div>';
+      }
+    }
+  </script>
 </body>
 </html>
