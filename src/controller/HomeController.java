@@ -19,13 +19,11 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy danh sách sản phẩm từ DB
         List<Product> products = productDAO.getRecentProducts();
         
-        // Gắn vào request để truyền sang file giao diện
         request.setAttribute("products", products);
+        request.setAttribute("searchKeyword", "");
         
-        // Chuyển hướng sang trang 01-trang-chu.jsp
-        request.getRequestDispatcher("01-trang-chu.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

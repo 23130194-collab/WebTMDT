@@ -126,12 +126,19 @@
       <c:choose>
         <c:when test="${empty products}">
           <div class="col-span-full text-center py-12 text-slate-500">
-            <p>Chưa có sản phẩm nào trên hệ thống. Hãy là người đầu tiên đăng tin!</p>
+            <c:choose>
+              <c:when test="${not empty searchKeyword}">
+                <p>Không tìm thấy sản phẩm phù hợp với từ khóa “<c:out value="${searchKeyword}"/>”.</p>
+              </c:when>
+              <c:otherwise>
+                <p>Chưa có sản phẩm nào trên hệ thống. Hãy là người đầu tiên đăng tin!</p>
+              </c:otherwise>
+            </c:choose>
           </div>
         </c:when>
         <c:otherwise>
           <c:forEach var="p" items="${products}">
-            <div class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp?id=${p.id}'">
+            <div class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" data-description="<c:out value='${p.description}'/>" onclick="window.location.href='02-chi-tiet-san-pham.jsp?id=${p.id}'">
               <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
                 <c:choose>
                   <c:when test="${not empty p.primaryImage}">
@@ -215,7 +222,8 @@
         let matchCategory = (activeCategory === 'all') || (cat === activeCategory);
         let matchShipping = (shipping === 'all') || (ship === shipping);
         let matchDistrict = (district === 'all') || (dist === district);
-        let matchSearch = !keyword || title.includes(keyword);
+        const description = (card.getAttribute('data-description') || '').toLowerCase();
+        let matchSearch = !keyword || title.includes(keyword) || description.includes(keyword);
 
         if (matchCategory && matchShipping && matchDistrict && matchSearch) {
           card.style.display = 'flex';
@@ -237,6 +245,12 @@
 
       // Update count text
       document.getElementById('resultCountText').innerText = `Đang hiển thị \${visibleCount} tin đăng phù hợp với tiêu chí lọc`;
+    }
+
+    const initialSearch = new URLSearchParams(window.location.search).get('q') || '';
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput && initialSearch) {
+      searchInput.value = initialSearch;
     }
 
     function loadMoreProducts() {

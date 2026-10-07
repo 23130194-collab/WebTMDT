@@ -1,4 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%
+    // Trang gốc vẫn dùng giao diện này; chuyển qua HomeController để nạp dữ liệu trước.
+    if (request.getAttribute("products") == null) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -120,6 +129,38 @@
 
     <!-- LƯỚI BÀI ĐĂNG SẢN PHẨM: ĐỒNG BỘ 100% CHIỀU CAO KHUNG CARD -->
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 items-stretch">
+
+      <c:forEach var="p" items="${products}">
+        <div data-category="${p.categoryId == 3 ? 'xeco' : 'dientu'}" data-shipping="unknown" data-district="unknown" data-price="${p.price}" data-description="<c:out value='${p.description}'/>" class="product-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp?id=${p.id}'">
+          <div class="relative w-full h-48 sm:h-52 bg-slate-100 overflow-hidden shrink-0">
+            <c:choose>
+              <c:when test="${not empty p.primaryImage}">
+                <img src="${p.primaryImage}" alt="<c:out value='${p.title}'/>" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              </c:when>
+              <c:otherwise>
+                <div class="w-full h-full flex items-center justify-center text-slate-400 bg-slate-200 text-xs">Không có ảnh</div>
+              </c:otherwise>
+            </c:choose>
+            <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">Tin mới</span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-base font-bold text-green-600"><fmt:formatNumber value="${p.price}" pattern="#,###"/> đ</div>
+              <h3 class="font-semibold text-slate-900 text-xs mt-1.5 group-hover:text-blue-600 line-clamp-2 leading-relaxed h-9"><c:out value="${p.title}"/></h3>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <span class="truncate pr-2"><c:out value="${p.location}"/></span>
+              <span class="whitespace-nowrap">Vừa xong</span>
+            </div>
+          </div>
+        </div>
+      </c:forEach>
+
+      <c:if test="${not empty param.q and empty products}">
+        <div class="col-span-full text-center py-12 text-slate-500">Không tìm thấy sản phẩm phù hợp với từ khóa “<c:out value="${param.q}"/>”.</div>
+      </c:if>
+
+      <c:if test="${empty products and empty param.q}">
 
       <!-- THẺ 1: IPHONE 13 PRO MAX -->
       <div data-category="dientu" data-shipping="3pl" data-district="q10" data-price="14800000" class="product-card bg-white rounded-xl border-2 border-amber-400 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group relative h-full cursor-pointer" onclick="window.location.href='02-chi-tiet-san-pham.jsp'">
@@ -373,14 +414,18 @@
         </div>
       </div>
 
+      </c:if>
+
     </div>
 
     <!-- NÚT XEM THÊM (CÓ LOGIC NẠP THÊM CARD MẪU) -->
+    <c:if test="${empty param.q}">
     <div class="text-center mt-10">
       <button id="loadMoreBtn" onclick="loadMoreProducts()" class="px-6 py-2.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-sm transition">
         Xem Thêm Tin Đăng Khác
       </button>
     </div>
+    </c:if>
 
   </main>
 
@@ -429,7 +474,8 @@
         let matchCategory = (activeCategory === 'all') || (cat === activeCategory);
         let matchShipping = (shipping === 'all') || (ship === shipping);
         let matchDistrict = (district === 'all') || (dist === district);
-        let matchSearch = !keyword || title.includes(keyword);
+        const description = (card.getAttribute('data-description') || '').toLowerCase();
+        let matchSearch = !keyword || title.includes(keyword) || description.includes(keyword);
 
         if (matchCategory && matchShipping && matchDistrict && matchSearch) {
           card.style.display = 'flex';
@@ -452,6 +498,13 @@
       // Update count text
       document.getElementById('resultCountText').innerText = `Đang hiển thị \${visibleCount} tin đăng phù hợp với tiêu chí lọc`;
     }
+
+    const initialSearch = new URLSearchParams(window.location.search).get('q') || '';
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput && initialSearch) {
+      searchInput.value = initialSearch;
+    }
+    applyFilters();
 
     function loadMoreProducts() {
       const grid = document.getElementById('productGrid');
