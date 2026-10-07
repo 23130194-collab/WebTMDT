@@ -14,6 +14,10 @@ public class Product {
     private String status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private String primaryImage;
+
+    public String getPrimaryImage() { return primaryImage; }
+    public void setPrimaryImage(String primaryImage) { this.primaryImage = primaryImage; }
 
     public Product() {
     }

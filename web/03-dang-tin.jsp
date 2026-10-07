@@ -60,7 +60,7 @@
           Bước 2: Hình ảnh thực tế (Tối đa 6 ảnh chụp rõ nét) <span class="text-red-500">*</span>
         </label>
         <label class="block border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-500 transition cursor-pointer bg-slate-50 relative">
-          <input type="file" name="images" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+          <input type="file" name="images" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewImages(this)">
           <div class="text-xs font-semibold text-blue-600">Bấm để tải ảnh chụp món đồ lên hoặc kéo thả tệp vào đây</div>
           <p class="text-[11px] text-slate-500 mt-1">Chụp đủ các góc cạnh, tem thông số, các vết trầy xước (nếu có) để người mua yên tâm</p>
           <div class="mt-4 flex flex-wrap justify-center gap-2.5">
@@ -278,5 +278,27 @@
     }
   </script>
 
+  <script>
+    function previewImages(input) {
+      const container = document.getElementById('previewContainer');
+      container.innerHTML = ''; 
+      
+      if (input.files && input.files.length > 0) {
+        for (let i = 0; i < input.files.length; i++) {
+          const file = input.files[i];
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+            const imgHtml = '<img src="' + e.target.result + '" class="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-sm" />';
+            container.innerHTML += imgHtml;
+          }
+          
+          reader.readAsDataURL(file);
+        }
+      } else {
+        container.innerHTML = '<div class="text-xs text-slate-400">Chưa chọn ảnh nào</div>';
+      }
+    }
+  </script>
 </body>
 </html>
